@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Memleek Tinderbox main script
+# Just builds everything everywhere
+
+# Public domain/CC0 2016-17 Wiktor W Brodlo <wiktor@brodlo.net>
+
+source /etc/tinderbox.conf
+
+cxxabi=
+[ "$STRICTCXXABI" == "yes" ] && cxxabi="$(tbtargetinfo / cxxabi)"
+
+cd "$TARGETSDIR"
+while true; do
+	emerge --sync
+	layman -S
+	for target in *; do
+		for pkg in $(cat "$WORLDFILE"); do
+			tbemerge "$target" "$pkg"
+		done
+	done
+	rm -f "$PUBPKGDIR"/"$cxxabi"/Packages
+	rm -rf "$PUBPKGDIR"/"$cxxabi"
+	cp -a "$PKGDIR"/"$cxxabi" "$PUBPKGDIR"/
+done
+

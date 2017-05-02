@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Memleek Tinderbox emerge wrapper
+# Picks the right emerge and runs it
+
+# Public domain/CC0 2016-17 Wiktor W Brodlo <wiktor@brodlo.net>
+
+source /etc/tinderbox.conf
+
+[ $# -lt 2 ] && echo "Usage: $0 target emerge-options" && exit 1
+
+target=$1
+shift
+
+emergecmd=emerge
+ourchost=$(tbtargetinfo / chost)
+targetchost=$(tbtargetinfo "$target" chost)
+[ "$ourchost" != "$targetchost" ] && emergecmd="${targetchost}-emerge"
+if ! which "$emergecmd" >/dev/null 2>/dev/null; then
+	echo "$targetchost not installed!"
+	exit 1
+fi
+CROSS_CMD=emerge
+
+if [ "$STRICTCXXABI" == "yes" ]; then
+	targetcxxabi=$(tbtargetinfo "$target" cxxabi)
+	hostcxxabi=$(tbtargetinfo / cxxabi)
+	[ "$targetcxxabi" != "$hostcxxabi" ] &&
+		echo "CXX ABI mismatch: target $targetcxxabi, host $hostcxxabi" &&
+		exit 1
+fi
+
+if [ "$SEPARATEMARCH" == "yes" ]; then
+	targetmarch=$(tbtargetinfo "$target" march)
+	PKGDIR="$PKGDIR"/"$targetmarch"
+fi
+
+export DISTDIR
+export PKGDIR
+export CROSS_CMD
+
+ACCEPT_PROPERTIES="-interactive" \
+GCC_COLORS= \
+FEATURES="binpkg-multi-instance notitles -getbinpkg $EXTRAFEATURES" \
+MAKEOPTS="-j1" \
+PORTAGE_BINHOST="" \
+PORTDIR=$(portageq get_repo_path / gentoo) \
+"$emergecmd" \
+--autounmask \
+--autounmask-write=n \
+--buildpkg=y \
+--buildpkg-exclude="$BINEXCLUDE" \
+--changed-deps=y \
+--color=n \
+--complete-graph=y \
+--config-root="$TARGETSDIR"/"$target" \
+--deep \
+--exclude="$EXCLUDE" \
+--getbinpkg=n \
+--getbinpkgonly=n \
+--jobs="$JOBS" \
+--load-average="$JOBS" \
+--misspell-suggestions=n \
+--newuse \
+--nospinner \
+--root="$ROOTSDIR"/"$target" \
+--root-deps \
+--update \
+--with-bdeps=y \
+$EXTRAOPTS \
+$@
+
