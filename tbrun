@@ -7,20 +7,36 @@
 
 source /etc/tinderbox.conf
 
-cxxabi=
-[ "$STRICTCXXABI" == "yes" ] && cxxabi="$(tbtargetinfo / cxxabi)"
-
 cd "$TARGETSDIR"
 while true; do
 	emerge --sync
 	layman -S
+
+	tblinktargets
+	tbprepare
+
+	gcc-config 5.4.0
+	source /etc/profile
 	for target in *; do
+		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
+		[ "$targetcxxabi" == "4" ] && continue
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"
 		done
 	done
-	rm -f "$PUBPKGDIR"/"$cxxabi"/Packages
-	rm -rf "$PUBPKGDIR"/"$cxxabi"
-	cp -a "$PKGDIR"/"$cxxabi" "$PUBPKGDIR"/
+
+	gcc-config 4.9.4
+	source /etc/profile
+	for target in *; do
+		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
+		[ "$targetcxxabi" == "5" ] && continue
+		for pkg in $(cat "$WORLDFILE"); do
+			tbemerge "$target" "$pkg"
+		done
+	done
+
+	rm -f "$PUBPKGDIR"/*/Packages
+	rm -rf "$PUBPKGDIR"/*
+	cp -a "$PKGDIR"/* "$PUBPKGDIR"/
 done
 

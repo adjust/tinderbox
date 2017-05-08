@@ -11,6 +11,11 @@ source /etc/tinderbox.conf
 cd "$TARGETSDIR"
 for target in *; do
 	[ ! -z "$(ls -A $ROOTSDIR/$target)" ] && continue
+
+	gcc-config 5.4.0
+	[ "$(tbtargetinfo $target cxxabi)" == 4 ] && gcc-config 4.9.4
+	source /etc/profile
+
 	tbemerge "$target" --nodep --oneshot baselayout
 	tbemerge "$target" --nodep --oneshot app-portage/elt-patches
 	tbemerge "$target" --root-deps=rdeps --oneshot virtual/libc

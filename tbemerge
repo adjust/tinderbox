@@ -24,10 +24,7 @@ CROSS_CMD=emerge
 
 if [ "$STRICTCXXABI" == "yes" ]; then
 	targetcxxabi=$(tbtargetinfo "$target" cxxabi)
-	hostcxxabi=$(tbtargetinfo / cxxabi)
-	[ "$targetcxxabi" != "$hostcxxabi" ] &&
-		echo "CXX ABI mismatch: target $targetcxxabi, host $hostcxxabi" &&
-		exit 1
+	PKGDIR="$PKGDIR"/"$targetcxxabi"
 fi
 
 if [ "$SEPARATEMARCH" == "yes" ]; then
@@ -42,7 +39,7 @@ export CROSS_CMD
 ACCEPT_PROPERTIES="-interactive" \
 GCC_COLORS= \
 FEATURES="binpkg-multi-instance notitles -getbinpkg $EXTRAFEATURES" \
-MAKEOPTS="-j1" \
+MAKEOPTS="-j$JOBS -l$JOBS" \
 PORTAGE_BINHOST="" \
 PORTDIR=$(portageq get_repo_path / gentoo) \
 "$emergecmd" \
