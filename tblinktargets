@@ -14,17 +14,17 @@ cd ->/dev/null
 enabletargets=("${targets[0]}")
 
 for target in "${targets[@]}"; do
-	maybeunique=$(false)
+	maybeunique=false
 	for cmptarget in "${enabletargets[@]}"; do
 		diff -r "$AVAILDIR"/"$target" "$AVAILDIR"/"$cmptarget">/dev/null
 		# This target is identical to another one, skip it.
 		[ $? == 0 ] && continue 2
 		# This target isn't indentical to any target tried yet.
 		# Mark it as possibly unique and keep comparing.
-		maybeunique=$(true)
+		maybeunique=true
 	done
 	# This target is unique
-	[ $maybeunique == $(true) ] && enabletargets+=("$target")
+	[ $maybeunique == true ] && enabletargets+=("$target")
 done
 
 rm -f "$TARGETSDIR"/*
