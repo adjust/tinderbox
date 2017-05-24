@@ -22,10 +22,8 @@ if ! which "$emergecmd" >/dev/null 2>/dev/null; then
 fi
 CROSS_CMD=emerge
 
-if [ "$STRICTCXXABI" == "yes" ]; then
-	targetcxxabi=$(tbtargetinfo "$target" cxxabi)
-	PKGDIR="$PKGDIR"/"$targetcxxabi"
-fi
+targetcxxabi=$(tbtargetinfo "$target" cxxabi)
+PKGDIR="$PKGDIR"/"$targetcxxabi"
 
 if [ "$SEPARATEMARCH" == "yes" ]; then
 	targetmarch=$(tbtargetinfo "$target" march)
