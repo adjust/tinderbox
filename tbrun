@@ -9,8 +9,10 @@ source /etc/tinderbox.conf
 
 cd "$TARGETSDIR"
 while true; do
-	emerge --sync
-	layman -S
+	if [ "$SYNCREPOS" == "yes" ]; then
+		emerge --sync
+		layman -S
+	fi
 
 	tblinktargets
 	tbprepare
