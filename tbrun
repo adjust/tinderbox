@@ -14,6 +14,10 @@ while true; do
 		layman -S
 	fi
 
+	cd "$REXDIR"
+	git pull
+	cd -
+
 	tblinktargets
 	tbprepare
 

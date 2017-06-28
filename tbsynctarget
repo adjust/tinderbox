@@ -1,22 +1,14 @@
 #!/bin/bash
 
-set -e -o pipefail
-
 source /etc/tinderbox.conf
 
 [ -z "$1" ] && echo "Usage: $0 target" && exit 1
 
-mkdir -p "$AVAILDIR"/"$1"/etc
+mkdir -p "$AVAILDIR"/"$1"/etc/portage
 
-target="$1"
-targetname="$target"
-getent ahosts "$targetname" || targetname="$targetname".adjust.com
+cd "$REXDIR"
+rex -H "$1" $REXTASK
+cd -
 
-rsync -e 'ssh -o StrictHostKeyChecking=no' -az --delete "$targetname":/etc/portage "$AVAILDIR"/"$target"/etc/
-tmpworld=$(mktemp)
-rsync -e 'ssh -o StrictHostKeyChecking=no' -z "$targetname":/var/lib/portage/world "$tmpworld"
-cat "$tmpworld" >> "$WORLDFILE"
-rm "$tmpworld"
-
-tbfixprofile "$target"
+tbfixprofile "$1"
 

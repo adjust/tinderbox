@@ -1,19 +1,14 @@
 #!/bin/bash
 
-# Fixes make.profile in the target to be an absolute symlink.
-# This is needed because eselect profile stupidly makes make.profile a relative
-# symlink.
+# Sets the make.profile symlink.
 
 source /etc/tinderbox.conf
 
 [ -z "$1" ] && echo "Usage: $0 target" && exit 1
 
 portdir=$(portageq get_repo_path / gentoo)
-
 target="$AVAILDIR"/"$1"
 
-profile=$(readlink "$target"/etc/portage/make.profile)
-profile=${profile##*profiles/}
-rm "$target"/etc/portage/make.profile
-ln -s "$portdir"/profiles/"$profile" "$target"/etc/portage/make.profile
+rm -f "$target"/etc/portage/make.profile
+ln -s "$portdir"/profiles/default/linux/amd64/13.0/no-multilib "$target"/etc/portage/make.profile
 
