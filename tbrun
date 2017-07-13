@@ -26,6 +26,7 @@ while true; do
 	for target in *; do
 		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
 		[ "$targetcxxabi" == "4" ] && continue
+		tbemerge "$target" "@system"
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"
 		done
@@ -36,6 +37,7 @@ while true; do
 	for target in *; do
 		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
 		[ "$targetcxxabi" == "5" ] && continue
+		tbemerge "$target" "@system"
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"
 		done
