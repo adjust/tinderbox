@@ -43,8 +43,10 @@ while true; do
 		done
 	done
 
+	chmod ga+rX -Rv "$PKGDIR"
 	rm -f "$PUBPKGDIR"/*/Packages
 	rm -rf "$PUBPKGDIR"/*
 	cp -a "$PKGDIR"/* "$PUBPKGDIR"/
+	chmod ga+rX -Rv "$PUBPKGDIR"
 done
 
