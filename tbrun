@@ -21,22 +21,12 @@ while true; do
 	tblinktargets
 	tbprepare
 
-	gcc-config 5.4.0
-	source /etc/profile
 	for target in *; do
+		# Avoid building packages for the wrong C++11 ABI
 		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
-		[ "$targetcxxabi" == "4" ] && continue
-		tbemerge "$target" "@system"
-		for pkg in $(cat "$WORLDFILE"); do
-			tbemerge "$target" "$pkg"
-		done
-	done
+		hostcxxabi=$(tbtargetinfo / cxxabi)
+		[ "$targetcxxabi" != "$hostcxxabi" ] && continue
 
-	gcc-config 4.9.4
-	source /etc/profile
-	for target in *; do
-		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
-		[ "$targetcxxabi" == "5" ] && continue
 		tbemerge "$target" "@system"
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"
