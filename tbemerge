@@ -56,7 +56,6 @@ PORTDIR=$(portageq get_repo_path / gentoo) \
 --newuse \
 --nospinner \
 --root="$ROOTSDIR"/"$target" \
---root-deps \
 --update \
 --with-bdeps=y \
 $EXTRAOPTS \

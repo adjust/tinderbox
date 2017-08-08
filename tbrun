@@ -32,6 +32,8 @@ while true; do
 		tbemerge "$target" "@system"
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"
+			# Also package build deps for local rebuilds
+			tbemerge "$target" --root-deps "$pkg"
 		done
 	done
 
