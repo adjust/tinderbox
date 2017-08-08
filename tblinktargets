@@ -10,12 +10,12 @@ cd "$AVAILDIR"
 targets=(*)
 cd ->/dev/null
 
+for target in "${targets[@]}"; do
+	tbfixprofile "$target"
+done
+
 # Targets for symlinking
 enabletargets=("${targets[0]}")
-
-for target in "${targets[@]}"; do
-	tbsynctarget "$target"
-done
 
 for target in "${targets[@]}"; do
 	maybeunique=false

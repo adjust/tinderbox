@@ -14,9 +14,11 @@ while true; do
 		layman -S
 	fi
 
-	cd "$REXDIR"
-	git pull
-	cd -
+	if [ "$CLEANAVAILDIR" == "yes" ]; then
+		rm -rf "$AVAILDIR"/*
+	fi
+
+	sh -c "$UPDATETARGETSCMD"
 
 	tblinktargets
 	tbprepare
