@@ -35,6 +35,7 @@ while true; do
 			# Also package build deps for local rebuilds
 			tbemerge "$target" --root-deps "$pkg"
 		done
+		tbemerge "$target" "@world"
 	done
 
 	tbpublish
