@@ -24,11 +24,6 @@ while true; do
 	tbprepare
 
 	for target in *; do
-		# Avoid building packages for the wrong C++11 ABI
-		targetcxxabi=$(tbtargetinfo "$target" cxxabi)
-		hostcxxabi=$(tbtargetinfo / cxxabi)
-		[ "$targetcxxabi" != "$hostcxxabi" ] && continue
-
 		tbemerge "$target" "@system"
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"

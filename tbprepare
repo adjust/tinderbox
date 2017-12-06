@@ -11,10 +11,6 @@ source /etc/tinderbox.conf
 cd "$TARGETSDIR"
 for target in *; do
 	[ ! -z "$(ls -A $ROOTSDIR/$target)" ] && continue
-	# Avoid building packages for the wrong C++11 ABI
-	targetcxxabi=$(tbtargetinfo "$target" cxxabi)
-	hostcxxabi=$(tbtargetinfo / cxxabi)
-	[ "$targetcxxabi" != "$hostcxxabi" ] && continue
 
 	tbemerge "$target" --nodep --oneshot baselayout
 	tbemerge "$target" --nodep --oneshot app-portage/elt-patches
