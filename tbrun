@@ -24,6 +24,7 @@ while true; do
 	tbprepare
 
 	for target in *; do
+		TARGET="$target" sh -c "$UPDATESINGLETARGETCMD"
 		tbemerge "$target" "@system"
 		for pkg in $(cat "$WORLDFILE"); do
 			tbemerge "$target" "$pkg"
