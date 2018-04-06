@@ -33,6 +33,7 @@ done
 
 rm -f "$TARGETSDIR"/*
 for target in "${enabletargets[@]}"; do
+	[ $(tbtargetinfo "$target" march) == "native" ] && continue
 	ln -s "$AVAILDIR"/"$target" "$TARGETSDIR"
 	mkdir -p "$ROOTSDIR"/"$target"
 done
