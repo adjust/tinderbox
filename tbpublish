@@ -3,7 +3,7 @@
 # Memleek Tinderbox package publisher
 # Copies binpkgs to public directory
 
-# Public domain/CC0 2017 Wiktor W Brodlo <wiktor@brodlo.net>
+# Public domain/CC0 2017-2018 Wiktor Kerr <w@kerr.sh>
 
 source /etc/tinderbox.conf
 
@@ -11,5 +11,6 @@ chmod ga+rX -Rv "$PKGDIR"
 rm -f "$PUBPKGDIR"/*/Packages
 rm -rf "$PUBPKGDIR"/*
 cp -a "$PKGDIR"/* "$PUBPKGDIR"/
+cp -a "$DISTDIR" "$PUBPKGDIR"/ 
 chmod ga+rX -Rv "$PUBPKGDIR"
 
