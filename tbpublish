@@ -14,3 +14,10 @@ cp -a "$PKGDIR"/* "$PUBPKGDIR"/
 cp -a "$DISTDIR" "$PUBPKGDIR"/ 
 chmod ga+rX -Rv "$PUBPKGDIR"
 
+if [ "$COPYREPO" == "yes" ]; then
+	rm -rf "$PUBREPODIR".tmp
+	mkdir -p "$PUBREPODIR".tmp
+	cp -a "$(portageq get_repo_path / gentoo)"/* "$PUBREPODIR".tmp
+	rm -rf "$PUBREPODIR"
+	mv "$PUBREPODIR".tmp "$PUBREPODIR"
+fi
