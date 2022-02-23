@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Memleek Tinderbox target preparator
 # Prepares targets by installing some packages to create a base directory
