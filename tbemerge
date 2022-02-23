@@ -43,7 +43,7 @@ PORTDIR=$(portageq get_repo_path / gentoo) \
 --buildpkg=y \
 --buildpkg-exclude="$BINEXCLUDE" \
 --changed-deps=y \
---color=n \
+--color=y \
 --complete-graph=y \
 --config-root="$TARGETSDIR"/"$target" \
 --deep \
