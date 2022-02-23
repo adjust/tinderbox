@@ -54,7 +54,6 @@ PORTDIR=$(portageq get_repo_path / gentoo) \
 --load-average="$JOBS" \
 --misspell-suggestions=n \
 --newuse \
---nospinner \
 --root="$ROOTSDIR"/"$target" \
 --update \
 --with-bdeps=y \
