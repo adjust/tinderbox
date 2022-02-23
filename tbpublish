@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Memleek Tinderbox package publisher
 # Copies binpkgs to public directory

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Memleek Tinderbox target information tool
 # Detects various things about a given target

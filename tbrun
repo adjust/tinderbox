@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Memleek Tinderbox main script
 # Just builds everything everywhere

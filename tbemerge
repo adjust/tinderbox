@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Memleek Tinderbox emerge wrapper
 # Picks the right emerge and runs it

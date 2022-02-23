@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Detects identical targets in $AVAILDIR and symlinks the unique ones into
 # $TARGETSDIR.
