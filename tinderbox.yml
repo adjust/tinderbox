@@ -1,0 +1,54 @@
+---
+# Tinderbox base directory. For convenience only, the scripts don't use it.
+BASEDIR: &basedir "/binhost"
+
+# Directory to store selected targets in.
+TARGETSDIR: !join [*basedir, "/confs"]
+
+# Directory to store binpkgs in.
+PKGDIR: !join [*basedir, "/haswell/packages"]
+
+# Directory to store the root directories in (passed to emerge --root=).
+ROOTSDIR: !join [*basedir, "/roots"]
+
+# Directory to store binpkgs in.
+PKGDIR: !join [*basedir, "/packages"]
+
+# Directory to publish packages.
+PUBPKGDIR: !join [*basedir, "/pub"]
+
+# Directory to store sources in.
+DISTDIR: !join [*basedir, "/distfiles"]
+
+# Clone of the adjust infrastructure repository.
+REPODIR: !join [*basedir, "/repo"]
+
+# Path to the file that contains the list of packages to build
+WORLDFILE: !join [*basedir, "/etc/portage/world"]
+
+# Packages to exclude.
+# passed to emerge --exclude=
+EXCLUDE: &exclude "sys-fs/zfs-kmod sys-fs/zfs dev-ruby/* dev-perl/* sys-libs/glibc sys-libs/libxcrypt"
+
+# passed to emerge --buildpkg-exclude=
+BINEXCLUDE: !join [*exclude, " */*-bin */*-config app-eselect/* java-virtuals/* sys-apps/baselayout sys-firmware/* sys-kernel/* virtual/* dev-perl/DBD-* sys-fs/zfs-kmod sys-fs/zfs dev-libs/libxml2"]
+
+# Number of concurrent jobs.
+# Set it to 0 if you want this value to be worked out automatically
+# (using the nproc command).
+JOBS: 0
+
+# Disable the interactive feature.
+ACCEPT_PROPERTIES: "-interactive"
+
+# Portage features.
+FEATURES: "binpkg-multi-instance notitles -getbinpkg"
+
+# GCC colours.
+GCC_COLORS: ""
+
+# Portage binhost variable.
+PORTAGE_BINHOST: ""
+
+# Portage compression command.
+PORTAGE_COMPRESSION_COMMAND: "bzip2"
