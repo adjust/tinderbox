@@ -31,6 +31,7 @@ my_env = {
 
 
 def run():
+    """Perform a complete tinderbox run."""
     clean_targets()
     create_targets()
     prepare()
@@ -39,14 +40,26 @@ def run():
 
 
 def clean_targets():
-    for target in glob.glob(f'{yml["TARGETSDIR"]}/confs/*'):
+    """Clean directories in TARGETSDIR."""
+    logger.info(f'Cleaning directories in {yml["TARGETSDIR"]}/* ...')
+    for target in glob.glob(f'{yml["TARGETSDIR"]}/*'):
         if not os.path.isdir(target):
             continue
         logger.info(f"Deleting directory {target}")
         shutil.rmtree(target)
+    logger.info("Done.")
+
+
+def create_targets():
+    """Create targets in TARGETSDIR."""
+    os.chdir(yml["REPODIR"])
+    command = CREATE_TARGETS.format(root=yml["TARGETSDIR"])
+    logger.info(f"Running '{command}'")
+    tbc.run(command)
 
 
 def set_profile(target):
+    """Set the right profile for a given target."""
     try:
         os.remove(f"{target}/etc/portage/make.profile")
     except Exception:
@@ -59,6 +72,7 @@ def set_profile(target):
 
 
 def prepare():
+    """Emerge base packages for all targets in TARGETSDIR."""
     emerge = Emerge(env=my_env)
     for target in iter(os.listdir(yml["TARGETSDIR"])):
         if not os.path.isdir(os.path.join(yml["TARGETSDIR"], target)):
@@ -87,14 +101,8 @@ def prepare():
         emerge.args("--keep-going @system").run()
 
 
-def create_targets():
-    os.chdir(yml["REPODIR"])
-    command = CREATE_TARGETS.format(root=yml["TARGETSDIR"])
-    logger.info(f"Running '{command}'")
-    tbc.run(command)
-
-
 def update_single_target(target, root):
+    """Update files for a given target."""
     os.chdir(yml["REPODIR"])
     command = UPDATE_SINGLE_TARGET.format(target=target, root=root)
     logger.info(f"Running '{command}'")
@@ -102,6 +110,7 @@ def update_single_target(target, root):
 
 
 def compile_packages():
+    """Compile @system and @world packages for all targets."""
     emerge = Emerge(env=my_env)
     for target in iter(os.listdir(yml["TARGETSDIR"])):
         update_single_target(target=target, root=yml["TARGETSDIR"])
