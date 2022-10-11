@@ -4,13 +4,12 @@ import os
 import shutil
 
 import tb.commands as tbc
-import tb.yml as tbyml
+import tb.yml as tyml
 from tb.emerge import Emerge
 from tb.templates import UPDATE_SINGLE_TARGET, CREATE_TARGETS
 
 
-tbyml.read_yml()
-yml = tbyml.get_yml()
+yml = tyml.Config().get()
 
 
 logging.basicConfig(
