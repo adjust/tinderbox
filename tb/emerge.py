@@ -1,11 +1,11 @@
 import logging
 
 import tb.commands as tbc
-import tb.yml as tbyml
+import tb.yml as tyml
 from tb.templates import EMERGE
 
-tbyml.read_yml()
-yml = tbyml.get_yml()
+
+yml = tyml.Config().get()
 
 
 logging.basicConfig(
