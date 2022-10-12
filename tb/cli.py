@@ -11,7 +11,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-__version__ = "0.0.1"
+__version__ = "1.0"
 __author__ = "adjust OS team"
 __email__ = "platform.os@adjust.com"
 __date__ = "30/09/2022"

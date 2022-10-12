@@ -26,5 +26,8 @@ Options:
 ## CREDITS
 adjust OS team <<platform.os@adjust.com>>
 
+## VERSION
+1.0
+
 ## LICENSE
 Creative Commons Zero v1.0 Universal
