@@ -4,13 +4,13 @@ import yaml
 import tb.commands as tbc
 
 
-TINDERBOX_CONFIG = "./tinderbox.yml"
+TINDERBOX_CONFIG = "/etc/tinderbox.yml"
 """Path to the tinderbox configuration file."""
 
 
 class Config:
     """The Config class represents our tinderbox.yml configuration file and
-    contains the logic necessary to open and read it."""
+    contains the logic necessary to open it and read it."""
 
     __instance = None
     __yml = None
