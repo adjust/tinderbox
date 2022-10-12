@@ -1,9 +1,10 @@
-from setuptools import setup, find_packages
-import tb.cli
-
 # To use a consistent encoding
 from codecs import open
 from os import path
+
+from setuptools import find_packages, setup
+
+import tb.cli
 
 # Name of current file.
 here = path.abspath(path.dirname(__file__))

@@ -4,7 +4,6 @@ import tb.commands as tbc
 import tb.yml as tyml
 from tb.templates import EMERGE
 
-
 yml = tyml.Config().get()
 
 

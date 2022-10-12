@@ -1,8 +1,6 @@
 import yaml
 
-
 import tb.commands as tbc
-
 
 TINDERBOX_CONFIG = "/etc/tinderbox.yml"
 """Path to the tinderbox configuration file."""

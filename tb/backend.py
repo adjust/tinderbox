@@ -6,8 +6,7 @@ import shutil
 import tb.commands as tbc
 import tb.yml as tyml
 from tb.emerge import Emerge
-from tb.templates import UPDATE_SINGLE_TARGET, CREATE_TARGETS
-
+from tb.templates import CREATE_TARGETS, UPDATE_SINGLE_TARGET
 
 yml = tyml.Config().get()
 

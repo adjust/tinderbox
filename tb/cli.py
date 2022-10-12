@@ -1,11 +1,9 @@
 import logging
-import pydoc
 import sys
 
 import docopt
 
 import tb.backend as tbb
-
 
 logging.basicConfig(
     level=logging.INFO, format="[%(asctime)s][%(name)s][%(levelname)s]: %(message)s"
