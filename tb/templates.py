@@ -23,7 +23,7 @@ emerge \
 
 
 CREATE_TARGETS = """
-trex -t 20 -E nosudo -G all Adjust:Binhost:create_host_dir --root={root}
+trex -t max -E nosudo -G all Adjust:Binhost:create_host_dir --root={root}
 """.strip()
 
 
