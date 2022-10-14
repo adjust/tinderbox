@@ -31,6 +31,7 @@ my_env = {
 
 def run():
     """Perform a complete tinderbox run."""
+    clean_roots()
     clean_targets()
     create_targets()
     prepare()
