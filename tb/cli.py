@@ -25,6 +25,7 @@ Usage:
   tinderbox [-h|--help] [-v|--version] <command>
 
 Commands:
+  tinderbox clean_roots     clean roots directory.
   tinderbox clean_targets   clean targets directory.
   tinderbox create_targets  create targets directory.
   tinderbox prepare         compile base packages for all targets.
@@ -41,6 +42,7 @@ Options:
         )
 
         runner = {
+            "clean_roots": tbb.clean_roots,
             "clean_targets": tbb.clean_targets,
             "create_targets": tbb.create_targets,
             "prepare": tbb.prepare,

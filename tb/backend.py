@@ -38,6 +38,17 @@ def run():
     logger.info("Run complete!")
 
 
+def clean_roots():
+    """Clean directories in ROOTSDIR."""
+    logger.info(f'Cleaning directories in {yml["ROOTSDIR"]}/* ...')
+    for target in glob.glob(f'{yml["ROOTSDIR"]}/*'):
+        if not os.path.isdir(target):
+            continue
+        logger.info(f"Deleting directory {target}")
+        shutil.rmtree(target)
+    logger.info("Done.")
+
+
 def clean_targets():
     """Clean directories in TARGETSDIR."""
     logger.info(f'Cleaning directories in {yml["TARGETSDIR"]}/* ...')
