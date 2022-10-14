@@ -28,5 +28,5 @@ trex -t max -E nosudo -G all Adjust:Binhost:create_host_dir --root={root}
 
 
 UPDATE_SINGLE_TARGET = """
-trex -t 20 -E nosudo -H {target} Adjust:Binhost:genpcfg --root={root}
+trex -E nosudo -H {target} Adjust:Binhost:genpcfg --root={root}
 """.strip()
